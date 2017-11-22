@@ -13,6 +13,7 @@ public class Test {
     class GrandFather{
         void thinking(){
             System.out.println("I am a granfather");
+            System.out.println(this.toString());
         }
     }
 
@@ -20,6 +21,7 @@ public class Test {
         @Override
         void thinking() {
             System.out.println("I am a father");
+            System.out.println(this.toString());
         }
     }
 
@@ -32,6 +34,7 @@ public class Test {
                 //最后一个参数如果跟当前类不一致就直接抛异
                 MethodHandle mh = lookup.findSpecial(GrandFather.class,"thinking",mt,getClass());
                 mh.invoke(this);
+                System.out.println(this.toString());
             }catch (Throwable e){
                 e.printStackTrace();
             }
@@ -40,5 +43,6 @@ public class Test {
 
     public static void main(String[] args) {
         (new Test().new Son()).thinking();
+
     }
 }
